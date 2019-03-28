@@ -8,7 +8,7 @@ public class GridManager : MonoBehaviour
    const int rows = 3;
    const int cols = 5;
    int[,] _gems = new int[cols, rows];
-   public GameObject _gemprefab;
+   public GameObject Square;
    void Start()
    {
 //
@@ -48,8 +48,8 @@ public class GridManager : MonoBehaviour
            for (int y = 0; y < rows; y++)
            {
                Debug.Log("gem" + x + "," + y + ":" + _gems[x, y]);
-               GameObject gem = GameObject.Instantiate(new GameObject());
-               gem.transform.position = new Vector3(x * 3, y * 3);
+               GameObject gem = GameObject.Instantiate(Square);
+               gem.transform.position = new Vector3(x, y);
            }
 
        }
