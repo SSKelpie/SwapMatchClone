@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Xml.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -9,40 +10,43 @@ public class PlayerMove : MonoBehaviour
     const int cols = 5;
     public int _moves;
     private float Movespeed = 1f;
-    private 
+    private GridManager gm;
+    
     // Start is called before the first frame update
     void Start()
     {
-
+        gm = FindObjectOfType<GridManager>();
     }
 
 
 
     void Move()
     {
-                if (Input.GetKeyDown(KeyCode.A)) //Left
+                if (Input.GetKeyDown(KeyCode.A)&& transform.position.x < 5 && transform.position.y < 7)  //Left
                 {
-                    
-                    transform.position = new Vector3(transform.position.x - Movespeed,transform.position.y);
+                  
+                   Vector3 newpos = new Vector3(transform.position.x - Movespeed,transform.position.y);
+                   gm.switchgem(gm.Check4gameObject(newpos),transform.position, newpos);
                     _moves++;
                 }
-                if (Input.GetKeyDown(KeyCode.D)) //Right
+                if (Input.GetKeyDown(KeyCode.D) && transform.position.x < 5 && transform.position.y < 7) //Right
                 {
-                    transform.position = new Vector3(transform.position.x + Movespeed,transform.position.y);
+                    Vector3 newpos = new Vector3(transform.position.x + Movespeed,transform.position.y);
+                    gm.switchgem(gm.Check4gameObject(newpos),transform.position, newpos);
                     _moves++;
                 }
-                if (Input.GetKeyDown(KeyCode.W)) //Up
+                if (Input.GetKeyDown(KeyCode.W) && transform.position.x < 5 && transform.position.y < 7) //Up
                 {
-                    transform.position = new Vector3(transform.position.x, transform.position.y + Movespeed);
+                    Vector3 newpos = new Vector3(transform.position.x, transform.position.y + Movespeed);
+                    gm.switchgem(gm.Check4gameObject(newpos),transform.position, newpos);
                     _moves++;
                 }
 
-                if (Input.GetKeyDown(KeyCode.S)) //Down
+                if (Input.GetKeyDown(KeyCode.S) && transform.position.x < 5 && transform.position.y < 7) //Down
                 {
-                    transform.position = new Vector3(transform.position.x,transform.position.y - Movespeed);
+                    Vector3 newpos = new Vector3(transform.position.x,transform.position.y - Movespeed);
+                    gm.switchgem(gm.Check4gameObject(newpos),transform.position, newpos);
                     _moves++;
-//                    Debug.Log("ahhhh");
-//                    Movespeed =  Mathf.Clamp(1, 0, 3);
                 }
 
     }
@@ -55,20 +59,6 @@ public class PlayerMove : MonoBehaviour
         }
       
     }
-    void Boundaries()
-    {
-//        Debug.Log("wtf");
-//        if (transform.position.x > 7 || transform.position.x < -7 || transform.position.y > 5 ||
-//            transform.position.y < -5)
-//        {
-//            Movespeed = 0;
-//        }
-        
-    }
-    
-
-   
-
 
 
    //  Update is called once per frame
@@ -76,6 +66,5 @@ public class PlayerMove : MonoBehaviour
     {
         Move();
         Counter();
-        //Boundaries();
     }
 }
